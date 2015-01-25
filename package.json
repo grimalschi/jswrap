@@ -1,0 +1,29 @@
+{
+  "name": "jswrap",
+  "title": "JavaScript try-catch wrapper",
+  "description": "Wraps every function in the try-catch statement",
+  "version": "0.1.2",
+  "homepage": "https://github.com/grimalschi/jswrap",
+  "author": {
+    "name": "Veaceslav Grimalschi",
+    "email": "grimalschi@yandex.ru",
+    "url": "https://github.com/grimalschi"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/grimalschi/jswrap.git"
+  },
+  "bugs": "https://github.com/grimalschi/jswrap/issues",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/grimalschi/jswrap/blob/master/LICENSE-MIT"
+    }
+  ],
+  "dependencies": {
+    "escodegen": "^1.4.3",
+    "esprima": "^1.2.2",
+    "lodash": "^2.4.1"
+  },
+  "keywords": []
+}

@@ -7,12 +7,16 @@ module.exports = function (code, catchbody) {
     escodegen = escodegen || require('escodegen');
     _ = _ || require('lodash');
 
-    if (catchbody) {
-        var ast = esprima.parse(catchbody);
-        var asttemplate = _.template(JSON.stringify(ast));
+    _.templateSettings = {
+        evaluate:    /\{\{#([\s\S]+?)\}\}/g,            // {{# console.log("blah") }}
+        interpolate: /\{\{[^#\{]([\s\S]+?)[^\}]\}\}/g,  // {{ title }}
+        escape:      /\{\{\{([\s\S]+?)\}\}\}/g,         // {{{ title }}}
+    }
 
+    if (catchbody) {
+        var astbody = JSON.stringify(esprima.parse(catchbody).body);
         var catcher = function (fn_id) {
-            return JSON.parse(asttemplate, { fn_id: id })
+            return JSON.parse(astbody.replace('{{fn_id}}', fn_id));
         }
     } else {
         var catcher = function () {
@@ -20,7 +24,7 @@ module.exports = function (code, catchbody) {
         }
     }
 
-    var ast = esprima.parse(code)
+    var root = esprima.parse(code)
 
     var fns = []
 
@@ -36,7 +40,7 @@ module.exports = function (code, catchbody) {
         })
     }
 
-    parse(ast)
+    parse(root)
 
     _.each(fns, function (fn, index) {
         // move nested functions outside the body
@@ -44,7 +48,7 @@ module.exports = function (code, catchbody) {
 
         _.each(fn.body.body, function (el) {
             if (isFn(el)) {
-                nestedFns.push(el)
+                nestedFns.push(el);
                 fn.body.body = _.without(fn.body.body, el);
             };
         })
@@ -75,7 +79,7 @@ module.exports = function (code, catchbody) {
         ]);
     });
 
-    var result = escodegen.generate(ast);
+    var result = escodegen.generate(root);
 
     return result;
 };

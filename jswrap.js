@@ -66,7 +66,7 @@ module.exports = function (code, catchbody) {
                         "type": "CatchClause",
                         "param": {
                             "type": "Identifier",
-                            "name": "e"
+                            "name": "jswrap_exception"
                         },
                         "body": {
                             "type": "BlockStatement",

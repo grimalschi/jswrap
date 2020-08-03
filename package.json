@@ -2,7 +2,7 @@
   "name": "jswrap",
   "title": "JavaScript try-catch wrapper",
   "description": "Wraps every function in the try-catch statement",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "./jswrap.js",
   "homepage": "https://github.com/grimalschi/jswrap",
   "author": {
@@ -22,8 +22,8 @@
     }
   ],
   "dependencies": {
-    "escodegen": "^1.4.3",
-    "esprima": "^1.2.2",
+    "escodegen": "^1.14.3",
+    "esprima": "^4.0.1",
     "lodash": "^2.4.1"
   },
   "keywords": []

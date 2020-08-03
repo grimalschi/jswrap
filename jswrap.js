@@ -2,7 +2,7 @@
 
 var esprima, escodegen, _;
 
-module.exports = function (code, catchbody) {
+module.exports = function (code, catchbody, module) {
     esprima = esprima || require('esprima');
     escodegen = escodegen || require('escodegen');
     _ = _ || require('lodash');
@@ -14,7 +14,7 @@ module.exports = function (code, catchbody) {
     }
 
     if (catchbody) {
-        var astbody = JSON.stringify(esprima.parse(catchbody).body);
+        var astbody = JSON.stringify(esprima.parseScript(catchbody).body);
         var catcher = function (fn_id) {
             return JSON.parse(astbody.replace('{{fn_id}}', fn_id));
         }
@@ -24,7 +24,7 @@ module.exports = function (code, catchbody) {
         }
     }
 
-    var root = esprima.parse(code)
+    var root = module ? esprima.parseModule(code) : esprima.parseScript(code)
 
     var fns = []
 

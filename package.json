@@ -24,7 +24,7 @@
   "dependencies": {
     "escodegen": "^1.14.3",
     "esprima": "^4.0.1",
-    "lodash": "^2.4.1"
+    "lodash": "^4.17.21"
   },
   "keywords": []
 }
